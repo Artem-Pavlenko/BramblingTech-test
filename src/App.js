@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import Table from "./components/Table/Table"
+import React, {useEffect, useState} from "react"
+import {getUsers} from "./store/usersReducer"
+import {useDispatch} from "react-redux"
+import ControlBlock from "./components/ControlBlock/ControlBlock";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const dispatch = useDispatch()
+    const [loading, setLoading] = useState(true)
+
+    useEffect( () => {
+        fetch('http://localhost:3000/data.json')
+            .then(response => response.json())
+            .then(res => {
+                dispatch(getUsers(res))
+                setLoading(false)
+            })
+    }, [])
+
+    if (loading) return null
+
+    return (
+        <div className="App">
+            <ControlBlock/>
+            <Table/>
+        </div>
+    )
 }
 
-export default App;
+export default App

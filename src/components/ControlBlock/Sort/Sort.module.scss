@@ -1,0 +1,35 @@
+
+.sortBlock {
+  display: flex;
+  flex-direction: column;
+  //border: 1px solid;
+  width: 50%;
+
+  .btnBlock1 {
+    display: flex;
+
+    button {
+      padding: 10px;
+      flex: 1;
+    }
+  }
+
+  .btnBlock2 {
+    display: flex;
+
+    button {
+      margin-top: 5px;
+      padding: 10px;
+      flex: 1;
+    }
+  }
+}
+
+button {
+  cursor: pointer;
+}
+
+.active {
+  opacity: .5;
+  cursor: auto;
+}

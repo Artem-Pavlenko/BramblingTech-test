@@ -1,0 +1,55 @@
+@import "./src/assets/scss/mixins";
+
+.itemBlock {
+  background-color: gray;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+
+  margin: 3px auto;
+
+  .age, {
+    width: 25%;
+    @include flexCenter();
+  }
+
+  .profileInfo {
+    width: 25%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+
+    img {
+      border-radius: 50%;
+      width: 20%;
+
+    }
+
+    span {
+
+    }
+  }
+
+  .age {
+
+  }
+
+  .phone {
+    width: 25%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .favorite {
+    width: 25%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    img {
+      cursor: pointer;
+      width: 10%;
+    }
+  }
+}

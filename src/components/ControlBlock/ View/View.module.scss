@@ -1,0 +1,17 @@
+
+.viewBlock {
+  display: flex;
+  flex-direction: column;
+  //border: 1px solid;
+  width: 30%;
+
+  .btnBlock {
+    display: flex;
+
+    button {
+      flex: 1;
+      padding: 32px;
+    }
+  }
+
+}
