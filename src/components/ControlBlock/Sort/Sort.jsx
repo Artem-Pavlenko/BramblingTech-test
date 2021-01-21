@@ -1,47 +1,33 @@
 import React, {useState} from 'react'
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import cn from 'classnames'
 import s from './Sort.module.scss'
-import {sortByAge, sortByDown, sortById, sortByName, sortByUp} from "../../../store/usersReducer"
+import {AGE, ID, NAME, sortByAge, sortByDown, sortById, sortByName, sortByUp} from "../../../store/usersReducer"
 
 const Sort = () => {
 
-    const [active, setActive] = useState(true)
-    const [activeID, setActiveID] = useState(true)
-    const [activeName, setActiveName] = useState(false)
-    const [activeAge, setActiveAge] = useState(false)
+    const {filter} = useSelector(state => state.users)
 
     const dispatch = useDispatch()
 
     const sortByIdHandler = () => {
-        dispatch(sortById(active))
-        setActiveID(true)
-        setActiveAge(false)
-        setActiveName(false)
+        dispatch(sortById())
     }
 
     const sortByAgeHandler = () => {
-        dispatch(sortByAge(active))
-        setActiveID(false)
-        setActiveAge(true)
-        setActiveName(false)
+        dispatch(sortByAge())
     }
 
     const sortByNameHandler = () => {
-        dispatch(sortByName(active))
-        setActiveID(false)
-        setActiveAge(false)
-        setActiveName(true)
+        dispatch(sortByName())
     }
 
     const sortUp = () => {
         dispatch(sortByUp())
-        setActive(true)
     }
 
     const sortDown = () => {
         dispatch(sortByDown())
-        setActive(false)
     }
 
     return (
@@ -50,22 +36,22 @@ const Sort = () => {
             <div className={s.btnBlock1}>
                 <button
                     onClick={sortByIdHandler}
-                    className={cn({[s.active]: activeID})}
-                    disabled={activeID}
+                    className={cn({[s.active]: filter.sort === ID})}
+                    disabled={filter.sort === ID}
                 >
                     ID
                 </button>
                 <button
                     onClick={sortByNameHandler}
-                    className={cn({[s.active]: activeName})}
-                    disabled={activeName}
+                    className={cn({[s.active]: filter.sort === NAME})}
+                    disabled={filter.sort === NAME}
                 >
                     Имя
                 </button>
                 <button
                     onClick={sortByAgeHandler}
-                    className={cn({[s.active]: activeAge})}
-                    disabled={activeAge}
+                    className={cn({[s.active]: filter.sort === AGE})}
+                    disabled={filter.sort === AGE}
                 >
                     Возраст
                 </button>
@@ -73,15 +59,15 @@ const Sort = () => {
             <div className={s.btnBlock2}>
                 <button
                     onClick={sortUp}
-                    className={cn({[s.active]: active})}
-                    disabled={active}
+                    className={cn({[s.active]: filter.upDown})}
+                    disabled={filter.upDown}
                 >
                     По возрастания
                 </button>
                 <button
                     onClick={sortDown}
-                    className={cn({[s.active]: !active})}
-                    disabled={!active}
+                    className={cn({[s.active]: !filter.upDown})}
+                    disabled={!filter.upDown}
                 >
                     По убыванию
                 </button>
