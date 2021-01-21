@@ -1,52 +1,74 @@
 
 .cartBlock {
-  padding: 20px;
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-between;
-  border: 1px solid;
   width: 49%;
   min-height: 30vh;
+  position: relative;
   @media screen and (max-width: 720px) {
     width: 100%;
+    margin-bottom: 7px;
+
   }
 
-  .profileInfo {
-    display: flex;
-    justify-content: space-between;
+  video {
+    width: 100%;
+    height: 100%;
+  }
 
-    div {
+  .wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+    border: 1px solid;
+    @media screen and (max-width: 720px) {
+      height: 300px;
+    }
+
+    .profileInfo {
       display: flex;
+      justify-content: space-between;
+
+      div {
+        display: flex;
+
+        img {
+          border-radius: 50%;
+          width: 20%;
+        }
+
+        span {
+          margin-left: 20px;
+        }
+      }
 
       img {
-        border-radius: 50%;
-        width: 20%;
+        cursor: pointer;
+        width: 5%;
       }
 
-      span {
-        margin-left: 20px;
-      }
+
     }
 
-    img {
-      cursor: pointer;
-      width: 5%;
+    .age {
+
     }
 
+    .phone {
 
+    }
+
+    .phrase {
+      margin-right: 25%;
+    }
   }
 
-  .age {
 
-  }
-
-  .phone {
-
-  }
-
-  .phrase {
-    margin-right: 25%;
-  }
 }

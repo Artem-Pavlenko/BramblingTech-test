@@ -7,8 +7,16 @@ const Preview = () => {
 
     const {users} = useSelector(state => state.users)
 
+    function autoplay(e) {
+        window.addEventListener('scroll', () => {
+            console.log('offset :',e.target.offsetTop)
+        })
+    }
+
+
+
     return (
-        <div className={s.previewBlock}>
+        <div onScroll={autoplay} className={s.previewBlock}>
             {users.map(u => <Cart key={u.id} {...u}/>)}
         </div>
     )
