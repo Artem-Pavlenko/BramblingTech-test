@@ -2,7 +2,18 @@ import React, {useState} from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import cn from 'classnames'
 import s from './Sort.module.scss'
-import {AGE, ID, NAME, sortByAge, sortByDown, sortById, sortByName, sortByUp} from "../../../store/usersReducer"
+import {
+    AGE,
+    DOWN,
+    ID,
+    NAME,
+    sortByAge,
+    sortByDown,
+    sortById,
+    sortByName,
+    sortByUp,
+    UP
+} from "../../../store/usersReducer"
 
 const Sort = () => {
 
@@ -59,15 +70,15 @@ const Sort = () => {
             <div className={s.btnBlock2}>
                 <button
                     onClick={sortUp}
-                    className={cn({[s.active]: filter.upDown})}
-                    disabled={filter.upDown}
+                    className={cn({[s.active]: filter.upDown === UP})}
+                    disabled={filter.upDown === UP}
                 >
                     По возрастания
                 </button>
                 <button
                     onClick={sortDown}
-                    className={cn({[s.active]: !filter.upDown})}
-                    disabled={!filter.upDown}
+                    className={cn({[s.active]: filter.upDown === DOWN})}
+                    disabled={filter.upDown === DOWN}
                 >
                     По убыванию
                 </button>

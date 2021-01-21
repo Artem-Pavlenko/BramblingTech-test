@@ -1,8 +1,12 @@
-import {DOWN_SORT, SET_FAVORITE, SET_USERS, SORT_BY_AGE, SORT_BY_ID, SORT_BY_NAME, UP_SORT} from "./types"
+import {DOWN_SORT, SET_FAVORITE, SET_USERS, SORT_BY_AGE, SORT_BY_ID, SORT_BY_NAME, UP_SORT, VIEW_FILTER} from "./types"
 
 export const ID = 'ID'
 export const AGE = 'AGE'
 export const NAME = 'NAME'
+export const TABLE = 'TABLE'
+export const PREVIEW = 'PREVIEW'
+export const UP = 'UP'
+export const DOWN = 'DOWN'
 
 const initState = {
     users: [
@@ -20,7 +24,8 @@ const initState = {
     filter: {
         term: '',
         sort: ID,
-        upDown: true
+        upDown: UP,
+        view: PREVIEW
     }
 }
 
@@ -38,7 +43,7 @@ export const usersReducer = (state = initState, action) => {
             return {
                 ...state,
                 filter: {...state.filter, sort: ID},
-                users: state.filter.upDown
+                users: state.filter.upDown === UP
                     ? state.users.slice().sort((a, b) => a.id - b.id)
                     : state.users.slice().sort((a, b) => b.id - a.id)
 
@@ -47,7 +52,7 @@ export const usersReducer = (state = initState, action) => {
             return {
                 ...state,
                 filter: {...state.filter, sort: AGE},
-                users: state.filter.upDown
+                users: state.filter.upDown === UP
                     ? state.users.slice().sort((a, b) => a.age - b.age)
                     : state.users.slice().sort((a, b) => b.age - a.age)
             }
@@ -55,7 +60,7 @@ export const usersReducer = (state = initState, action) => {
             return {
                 ...state,
                 filter: {...state.filter, sort: NAME},
-                users: state.filter.upDown
+                users: state.filter.upDown === UP
                     ? state.users.slice().sort((a, b) => {
                         if (a.name > b.name) {
                             return 1;
@@ -80,17 +85,17 @@ export const usersReducer = (state = initState, action) => {
             switch (state.filter.sort) {
                 case ID:
                     return {
-                        ...state, filter: {...state.filter, upDown: false},
+                        ...state, filter: {...state.filter, upDown: DOWN},
                         users: state.users.slice().sort((a, b) => b.id - a.id)
                     }
                 case AGE:
                     return {
-                        ...state, filter: {...state.filter, upDown: false},
+                        ...state, filter: {...state.filter, upDown: DOWN},
                         users: state.users.slice().sort((a, b) => b.age - a.age)
                     }
                 case NAME:
                     return {
-                        ...state, filter: {...state.filter, upDown: false},
+                        ...state, filter: {...state.filter, upDown: DOWN},
                         users: state.users.slice().sort((a, b) => {
                             if (a.name < b.name) {
                                 return 1;
@@ -108,17 +113,17 @@ export const usersReducer = (state = initState, action) => {
             switch (state.filter.sort) {
                 case ID:
                     return {
-                        ...state, filter: {...state.filter, upDown: true},
+                        ...state, filter: {...state.filter, upDown: UP},
                         users: state.users.slice().sort((a, b) => a.id - b.id)
                     }
                 case AGE:
                     return {
-                        ...state, filter: {...state.filter, upDown: true},
+                        ...state, filter: {...state.filter, upDown: UP},
                         users: state.users.slice().sort((a, b) => a.age - b.age)
                     }
                 case NAME:
                     return {
-                        ...state, filter: {...state.filter, upDown: true},
+                        ...state, filter: {...state.filter, upDown: UP},
                         users: state.users.slice().sort((a, b) => {
                             if (a.name > b.name) {
                                 return 1;
@@ -130,8 +135,10 @@ export const usersReducer = (state = initState, action) => {
                         })
                     }
                 default:
-                    return {...state, filter: {...state.filter, upDown: true}}
+                    return {...state, filter: {...state.filter, upDown: UP}}
             }
+        case VIEW_FILTER:
+            return {...state, filter: {...state.filter, view: action.payload}}
         default:
             return state
     }
@@ -144,6 +151,7 @@ export const sortByAge = () => ({type: SORT_BY_AGE})
 export const sortByName = () => ({type: SORT_BY_NAME})
 export const sortByDown = () => ({type: DOWN_SORT})
 export const sortByUp = () => ({type: UP_SORT})
+export const setView = (type) => ({type: VIEW_FILTER, payload: type})
 
 export const getUsers = (users) => (dispatch) => {
     dispatch(setUsers(users))

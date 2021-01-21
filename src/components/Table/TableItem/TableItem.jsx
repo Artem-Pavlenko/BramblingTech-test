@@ -2,32 +2,32 @@ import React from 'react'
 import {useDispatch} from "react-redux"
 import s from './TableItem.module.scss'
 import unFavourite from '../../../assets/unfavoriteStare.svg'
-import favourite from '../../../assets/favoriteStare.svg'
+import favouriteIMG from '../../../assets/favoriteStare.svg'
 import photo from '../../../assets/img/images/cat.svg'
 import {setFavorite} from "../../../store/usersReducer"
 
-const TableItem = (props) => {
+const TableItem = ({name, age, phone, image, favourite, id}) => {
 
     const dispatch = useDispatch()
 
     const onChangeFavorite = () => {
-        dispatch(setFavorite(props.id))
+        dispatch(setFavorite(id))
     }
 
     return (
         <div className={s.itemBlock}>
             <div className={s.profileInfo}>
                 <img src={photo} alt=""/>
-                <span>{props.name}</span>
+                <span>{name}</span>
             </div>
             <div className={s.age}>
-                <span>{props.age}</span>
+                <span>{age}</span>
             </div>
             <div className={s.phone}>
-                <span>{props.phone}</span>
+                <span>{phone}</span>
             </div>
             <div className={s.favorite}>
-                <img onClick={onChangeFavorite} src={props.favourite ? favourite : unFavourite} alt=""/>
+                <img onClick={onChangeFavorite} src={favourite ? favouriteIMG : unFavourite} alt=""/>
             </div>
         </div>
     )

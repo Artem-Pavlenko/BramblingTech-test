@@ -21,15 +21,14 @@
       margin-top: 5px;
       padding: 10px;
       flex: 1;
+      cursor: pointer;
+      transition: all .3s linear;
     }
   }
 }
 
-button {
-  cursor: pointer;
-}
-
 .active {
-  opacity: .5;
   cursor: auto;
+  opacity: .9;
+  transition: all .3s linear;
 }

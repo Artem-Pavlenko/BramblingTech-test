@@ -1,17 +1,19 @@
 import './App.css'
 import Table from "./components/Table/Table"
 import React, {useEffect, useState} from "react"
-import {getUsers} from "./store/usersReducer"
-import {useDispatch} from "react-redux"
+import {getUsers, TABLE} from "./store/usersReducer"
+import {useDispatch, useSelector} from "react-redux"
 import ControlBlock from "./components/ControlBlock/ControlBlock";
+import Preview from "./components/Preview/ Preview";
 
 
 function App() {
 
     const dispatch = useDispatch()
+    const {filter} = useSelector(state => state.users)
     const [loading, setLoading] = useState(true)
 
-    useEffect( () => {
+    useEffect(() => {
         fetch('http://localhost:3000/data.json')
             .then(response => response.json())
             .then(res => {
@@ -25,7 +27,9 @@ function App() {
     return (
         <div className="App">
             <ControlBlock/>
-            <Table/>
+            {filter.view === TABLE
+                ? <Table/>
+                : <Preview/>}
         </div>
     )
 }

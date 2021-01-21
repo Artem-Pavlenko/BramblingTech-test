@@ -11,6 +11,13 @@
     button {
       flex: 1;
       padding: 32px;
+      transition:  all .3s linear;
+      cursor: pointer;
+    }
+    .active {
+      cursor: auto;
+      opacity: .9;
+      transition:  all .3s linear;
     }
   }
 
