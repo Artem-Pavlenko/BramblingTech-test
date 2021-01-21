@@ -10,15 +10,12 @@ import pig from '../assets/img/images/pig.svg'
 import raccoon from '../assets/img/images/raccoon.svg'
 import react from '../assets/img/images/react.svg'
 import sheep from '../assets/img/images/sheep.svg'
+import {setLoading} from "./appReducer";
 
 
-export const ID = 'ID'
-export const AGE = 'AGE'
-export const NAME = 'NAME'
 export const TABLE = 'TABLE'
 export const PREVIEW = 'PREVIEW'
-export const UP = 'UP'
-export const DOWN = 'DOWN'
+
 
 const initState = {
     users: [
@@ -35,8 +32,8 @@ const initState = {
     ],
     filter: {
         term: '',
-        sort: ID,
-        upDown: UP,
+        sort: SORT_BY_ID,
+        upDown: UP_SORT,
         view: TABLE
     },
     photos: [
@@ -60,7 +57,7 @@ export const usersReducer = (state = initState, action) => {
             return {
                 ...state,
                 filter: {...state.filter, sort: SORT_BY_ID},
-                users: state.filter.upDown === UP
+                users: state.filter.upDown === UP_SORT
                     ? state.users.slice().sort((a, b) => a.id - b.id)
                     : state.users.slice().sort((a, b) => b.id - a.id)
 
@@ -69,7 +66,7 @@ export const usersReducer = (state = initState, action) => {
             return {
                 ...state,
                 filter: {...state.filter, sort: SORT_BY_AGE},
-                users: state.filter.upDown === UP
+                users: state.filter.upDown === UP_SORT
                     ? state.users.slice().sort((a, b) => a.age - b.age)
                     : state.users.slice().sort((a, b) => b.age - a.age)
             }
@@ -77,7 +74,7 @@ export const usersReducer = (state = initState, action) => {
             return {
                 ...state,
                 filter: {...state.filter, sort: SORT_BY_NAME},
-                users: state.filter.upDown === UP
+                users: state.filter.upDown === UP_SORT
                     ? state.users.slice().sort((a, b) => {
                         if (a.name > b.name) {
                             return 1;
@@ -171,9 +168,9 @@ export const getUsers = (users) => (dispatch) => {
     dispatch(setUsers(users))
 }
 
-
 export const reloadingPage = (upDown, sort, view) => (dispatch) => {
     dispatch(sortByUpDown(upDown))
     dispatch(sortBy(sort))
     dispatch(setView(view))
+    dispatch(setLoading(false))
 }

@@ -5,19 +5,30 @@
   //border: 1px solid;
   width: 30%;
 
+  .informationBlock {
+    display: flex;
+    justify-content: space-between;
+
+    img {
+      cursor: pointer;
+      width: 25px;
+    }
+  }
+
   .btnBlock {
     display: flex;
 
     button {
       flex: 1;
       padding: 32px;
-      transition:  all .3s linear;
+      transition: all .3s linear;
       cursor: pointer;
     }
+
     .active {
       cursor: auto;
       opacity: .9;
-      transition:  all .3s linear;
+      transition: all .3s linear;
     }
   }
 

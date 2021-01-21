@@ -3,10 +3,16 @@ import {useDispatch, useSelector} from "react-redux"
 import cn from 'classnames'
 import s from './View.module.scss'
 import {PREVIEW, setView, TABLE} from "../../../store/usersReducer"
+import {FormattedMessage} from "react-intl"
+import ru from '../../../assets/russia.svg'
+import en from '../../../assets/united-kingdom.svg'
+import {changeLanguage} from "../../../store/appReducer";
+
 
 const View = () => {
 
     const {filter} = useSelector(state => state.users)
+    const {language} = useSelector(state => state.app)
     const dispatch = useDispatch()
 
 
@@ -16,24 +22,34 @@ const View = () => {
     const changeTableHandler = () => {
         dispatch(setView(TABLE))
     }
+    const changeLanguageHandler = () => {
+        dispatch(changeLanguage())
+    }
 
     return (
         <div className={s.viewBlock}>
-            <h3>Вид</h3>
+            <div className={s.informationBlock}>
+                <h3><FormattedMessage id={'view'} defaultMessage={'View'}/></h3>
+                <img
+                    onClick={changeLanguageHandler}
+                    src={(language === 'en' && en) || (language === 'ru' && ru)}
+                    alt=""
+                />
+            </div>
             <div className={s.btnBlock}>
                 <button
                     onClick={changeTableHandler}
                     className={cn({[s.active]: filter.view === TABLE})}
                     disabled={filter.view === TABLE}
                 >
-                    Таблица
+                    <FormattedMessage id={'table'} defaultMessage={'Table'}/>
                 </button>
                 <button
                     onClick={changePreviewHandler}
                     className={cn({[s.active]: filter.view === PREVIEW})}
                     disabled={filter.view === PREVIEW}
                 >
-                    Превью
+                    <FormattedMessage id={'preview'} defaultMessage={'Preview'}/>
                 </button>
             </div>
         </div>

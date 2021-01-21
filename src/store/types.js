@@ -8,3 +8,8 @@ export const SORT_BY_NAME = 'users/SORT_BY_NAME'
 export const UP_SORT = 'users/UP_SORT'
 export const DOWN_SORT = 'users/DOWN_SORT'
 export const VIEW_FILTER = 'users/VIEW_FILTER'
+
+// app reducer
+
+export const SET_LOADING = 'app/SET_LOADING'
+export const SET_LANGUAGE = 'app/SET_LANGUAGE'
