@@ -3,8 +3,8 @@ import Table from "./components/Table/Table"
 import React, {useEffect, useState} from "react"
 import {getUsers, TABLE} from "./store/usersReducer"
 import {useDispatch, useSelector} from "react-redux"
-import ControlBlock from "./components/ControlBlock/ControlBlock";
-import Preview from "./components/Preview/ Preview";
+import ControlBlock from "./components/ControlBlock/ControlBlock"
+import Preview from "./components/Preview/ Preview"
 
 
 function App() {
@@ -27,6 +27,7 @@ function App() {
     return (
         <div className="App">
             <ControlBlock/>
+
             {filter.view === TABLE
                 ? <Table/>
                 : <Preview/>}

@@ -14,7 +14,6 @@ const Preview = () => {
     }
 
 
-
     return (
         <div onScroll={autoplay} className={s.previewBlock}>
             {users.map(u => <Cart key={u.id} {...u}/>)}
