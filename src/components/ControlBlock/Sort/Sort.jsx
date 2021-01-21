@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {useDispatch} from "react-redux"
 import cn from 'classnames'
 import s from './Sort.module.scss'
-import {sortByAge, sortById, sortByName} from "../../../store/usersReducer"
+import {sortByAge, sortByDown, sortById, sortByName, sortByUp} from "../../../store/usersReducer"
 
 const Sort = () => {
 
@@ -35,10 +35,12 @@ const Sort = () => {
     }
 
     const sortUp = () => {
+        dispatch(sortByUp())
         setActive(true)
     }
 
     const sortDown = () => {
+        dispatch(sortByDown())
         setActive(false)
     }
 

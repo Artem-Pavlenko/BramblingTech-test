@@ -1,5 +1,8 @@
 import {DOWN_SORT, SET_FAVORITE, SET_USERS, SORT_BY_AGE, SORT_BY_ID, SORT_BY_NAME, UP_SORT} from "./types"
 
+const ID = 'ID'
+const AGE = 'AGE'
+const NAME = 'NAME'
 
 const initState = {
     users: [
@@ -13,8 +16,14 @@ const initState = {
             "phrase": "Japman somam mes lizmasapa om zefopi ki wa ogju mofrajnir denba uc famoso opeipu woul.",
             "video": "shoe"
         }
-    ]
+    ],
+    filter: {
+        term: '',
+        sort: ID,
+        upDown: true
+    }
 }
+
 
 export const usersReducer = (state = initState, action) => {
     switch (action.type) {
@@ -26,9 +35,9 @@ export const usersReducer = (state = initState, action) => {
                 users: state.users.map(u => u.id === action.payload ? {...u, favourite: !u.favourite} : u)
             }
         case SORT_BY_ID:
-            debugger
             return {
                 ...state,
+                filter: {...state.filter, sort: ID},
                 users: action.payload
                     ? state.users.slice().sort((a, b) => a.id - b.id)
                     : state.users.slice().sort((a, b) => b.id - a.id)
@@ -37,6 +46,7 @@ export const usersReducer = (state = initState, action) => {
         case SORT_BY_AGE:
             return {
                 ...state,
+                filter: {...state.filter, sort: AGE},
                 users: action.payload
                     ? state.users.slice().sort((a, b) => a.age - b.age)
                     : state.users.slice().sort((a, b) => b.age - a.age)
@@ -44,6 +54,7 @@ export const usersReducer = (state = initState, action) => {
         case SORT_BY_NAME:
             return {
                 ...state,
+                filter: {...state.filter, sort: NAME},
                 users: action.payload
                     ? state.users.slice().sort((a, b) => {
                         if (a.name > b.name) {
@@ -64,7 +75,49 @@ export const usersReducer = (state = initState, action) => {
                         return 0;
                     })
             }
+        case DOWN_SORT:
+            switch (state.filter.sort) {
 
+                case ID:
+                    return {...state, users: state.users.slice().sort((a, b) => b.id - a.id)}
+                case AGE:
+                    return {...state, users: state.users.slice().sort((a, b) => b.age - a.age)}
+                case NAME:
+                    return {
+                        ...state, users: state.users.slice().sort((a, b) => {
+                            if (a.name < b.name) {
+                                return 1;
+                            }
+                            if (a.name > b.name) {
+                                return -1;
+                            }
+                            return 0;
+                        })
+                    }
+                default:
+                    return state
+            }
+        case UP_SORT:
+            switch (state.filter.sort) {
+                case ID:
+                    return {...state, users: state.users.slice().sort((a, b) => a.id - b.id)}
+                case AGE:
+                    return {...state, users: state.users.slice().sort((a, b) => a.age - b.age)}
+                case NAME:
+                    return {
+                        ...state, users: state.users.slice().sort((a, b) => {
+                            if (a.name > b.name) {
+                                return 1;
+                            }
+                            if (a.name < b.name) {
+                                return -1;
+                            }
+                            return 0;
+                        })
+                    }
+                default:
+                    return state
+            }
         default:
             return state
     }
