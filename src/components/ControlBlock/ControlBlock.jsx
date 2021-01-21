@@ -1,6 +1,6 @@
 import React from 'react'
 import Sort from "./Sort/Sort"
-import View from "./ View/ View"
+import View from "./ View/View"
 import s from './ControlBlock.module.scss'
 
 const ControlBlock = () => {

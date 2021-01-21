@@ -4,9 +4,7 @@ import cn from 'classnames'
 import s from './View.module.scss'
 import {PREVIEW, setView, TABLE} from "../../../store/usersReducer"
 import {FormattedMessage} from "react-intl"
-import ru from '../../../assets/russia.svg'
-import en from '../../../assets/united-kingdom.svg'
-import {changeLanguage} from "../../../store/appReducer";
+import {changeLanguage} from "../../../store/appReducer"
 
 
 const View = () => {
@@ -30,10 +28,9 @@ const View = () => {
         <div className={s.viewBlock}>
             <div className={s.informationBlock}>
                 <h3><FormattedMessage id={'view'} defaultMessage={'View'}/></h3>
-                <img
+                <div
+                    className={cn(s.en, {[s.ru]: language === 'ru'})}
                     onClick={changeLanguageHandler}
-                    src={(language === 'en' && en) || (language === 'ru' && ru)}
-                    alt=""
                 />
             </div>
             <div className={s.btnBlock}>

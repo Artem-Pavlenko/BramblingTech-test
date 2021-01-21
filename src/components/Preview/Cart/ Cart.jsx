@@ -2,7 +2,6 @@ import React, {useState, useRef} from 'react'
 import s from './Cart.module.scss'
 import favouriteIMG from '../../../assets/favoriteStare.svg'
 import unFavouriteIMG from '../../../assets/unfavoriteStare.svg'
-import temp from '../../../assets/img/images/cat.svg'
 import {useDispatch, useSelector} from "react-redux"
 import {setFavorite} from "../../../store/usersReducer"
 import boyVideo from '../../../assets/videos/boy.mp4'

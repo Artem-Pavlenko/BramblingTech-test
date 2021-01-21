@@ -5,10 +5,12 @@
   padding: 20px;
   display: flex;
   justify-content: space-between;
-
   margin: 3px auto;
+  opacity: 1;
+  animation: fade-in 2s forwards;
+  //transition: all 3s linear;
 
-  .age, {
+  .age {
     width: 25%;
     @include flexCenter();
   }
@@ -52,4 +54,44 @@
       width: 10%;
     }
   }
+}
+
+@keyframes load {
+  0% {
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+}
+
+.fadeIn {
+  opacity: 0;
+  transition: all 3s linear;
+}
+
+.fadeOut {
+    animation: fade-out 1s forwards;;
 }

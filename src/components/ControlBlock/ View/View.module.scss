@@ -9,9 +9,19 @@
     display: flex;
     justify-content: space-between;
 
-    img {
+    div {
       cursor: pointer;
       width: 25px;
+    }
+
+    .en {
+      background-image: url("../../../assets/united-kingdom.svg");
+      transition: all .3s linear;
+    }
+
+    .ru {
+      background-image: url("../../../assets/russia.svg");
+      transition: all .3s linear;
     }
   }
 
