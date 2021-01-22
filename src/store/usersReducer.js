@@ -20,13 +20,11 @@ import pig from '../assets/img/images/pig.svg'
 import raccoon from '../assets/img/images/raccoon.svg'
 import react from '../assets/img/images/react.svg'
 import sheep from '../assets/img/images/sheep.svg'
-import {setLoading} from "./appReducer";
-import {requestUsers} from "../api/userAPI";
-
+import {setLoading} from "./appReducer"
+import {requestUsers} from "../api/userAPI"
 
 export const TABLE = 'TABLE'
 export const PREVIEW = 'PREVIEW'
-
 
 const initState = {
     users: [],

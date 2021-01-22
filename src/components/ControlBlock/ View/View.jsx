@@ -13,7 +13,6 @@ const View = () => {
     const {language} = useSelector(state => state.app)
     const dispatch = useDispatch()
 
-
     const changePreviewHandler = () => {
         dispatch(setView(PREVIEW))
     }

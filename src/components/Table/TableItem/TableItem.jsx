@@ -25,7 +25,6 @@ const TableItem = ({name, age, phone, image, favourite, id, index}) => {
         return () => setRender(true)
     }, [index])
 
-
     return (
             <div className={`${render ? s.fadeIn : s.itemBlock}`}>
                 <div className={s.profileInfo}>

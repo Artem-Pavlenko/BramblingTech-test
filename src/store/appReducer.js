@@ -1,18 +1,15 @@
 import {SET_LANGUAGE, SET_LOADING} from "./types";
 
-
 const initState = {
     loading: true,
     language: 'en'
 }
-
 
 export const appReducer = (state = initState, action) => {
     switch (action.type) {
         case SET_LOADING:
             return {...state, loading: action.payload}
         case SET_LANGUAGE:
-            // debugger
             return {...state, language: (state.language === 'en' && 'ru') || (state.language === 'ru' && 'en')}
         default:
             return state
