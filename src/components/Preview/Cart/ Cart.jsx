@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import s from './Cart.module.scss'
 import favouriteIMG from '../../../assets/favoriteStare.svg'
 import unFavouriteIMG from '../../../assets/unfavoriteStare.svg'
@@ -9,14 +9,12 @@ import shoeVideo from '../../../assets/videos/shoe.mp4'
 import anonymous from '../../../assets/anonymous.svg'
 
 
-const Cart = ({name, age, phone, image, phrase, favourite, id, video}) => {
-
+const Cart = ({name, age, phone, image, phrase, favourite, id, video, index}) => {
 
     const videoRef = useRef(null)
-
     const dispatch = useDispatch()
     const {photos} = useSelector(state => state.users)
-
+    const [render, setRender] = useState(true)
     const [autoPlay, setAutoPlay] = useState(false)
     const [videoTouched, setVideoTouched] = useState(false)
 
@@ -32,41 +30,28 @@ const Cart = ({name, age, phone, image, phrase, favourite, id, video}) => {
         }
     }
 
-    // const testClick = (e) => {
-    //     const horizontalCenter = Math.floor(window.innerHeight)
-    //     const start = Math.floor(horizontalCenter / 3)
-    //     const finish = Math.floor(2 * (horizontalCenter / 3))
-    //
-    //     // верхний край страницы относительно нажатию
-    //     console.log('ref', videoRef.current.clientHeight)
-    //     console.log('clientY:', e.clientY)
-    //     console.log('horizontal start :', Math.floor(horizontalCenter / 3))
-    //     console.log('horizontal finish:', Math.floor(2 * (horizontalCenter / 3)))
-    // }
-
-
     if (videoRef.current) {
             window.addEventListener('scroll', () => {
                 if (videoRef.current) {
-
                     const a = videoRef.current.getBoundingClientRect()
-
                     const horizontal = Math.floor(window.innerHeight)
                     const start = Math.floor(horizontal / 3)
                     const finish = Math.floor(2 * (horizontal / 3))
-
-                    if (a.y < finish) {
+                    if (a.y < start && a.y < finish) {
                         setAutoPlay(true)
                     }
-                    console.log(videoRef)
                 }
             })
     }
 
-
+    useEffect(() => {
+        let time = +(index + '00')
+        setTimeout(() => setRender(false), time + 800)
+        return () => setRender(true)
+    }, [index])
 
     return (
-        <div className={s.cartBlock}>
+            <div className={`${render ? s.fadeIn : s.cartBlock}`}>
             {
                 video
                     ? <div>

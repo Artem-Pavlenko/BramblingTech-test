@@ -8,7 +8,6 @@ import Table from "./components/Table/Table"
 import Loader from "./common/Loader/Loader"
 import {IntlProvider} from "react-intl"
 import messages from './i18n/messages/index'
-import {requestUsers} from "./api/userAPI";
 
 
 function App() {
@@ -33,7 +32,6 @@ function App() {
                         ? <Table/>
                         : <Preview/>
                 }
-
             </div>
         </IntlProvider>
     )

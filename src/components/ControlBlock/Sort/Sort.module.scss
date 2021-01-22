@@ -2,19 +2,14 @@
 .sortBlock {
   display: flex;
   flex-direction: column;
-  //border: 1px solid;
   width: 50%;
 
   .btnBlock1 {
     display: flex;
-
-
   }
 
   .btnBlock2 {
     display: flex;
-
-
   }
 }
 
@@ -33,6 +28,7 @@ button {
   border: none;
   flex: 1;
   transition: background-color 1s linear 0s, top .2s linear 0s, box-shadow .2s linear 0s;
+
   &:hover {
     transition: background-color 1s linear 0s, top .2s linear 0s, box-shadow .2s linear 0s;
     top: 2px;
@@ -42,7 +38,7 @@ button {
 }
 
 .active {
-  cursor: auto!important;
+  cursor: auto !important;
   opacity: .5;
-  pointer-events:none;
+  pointer-events: none;
 }

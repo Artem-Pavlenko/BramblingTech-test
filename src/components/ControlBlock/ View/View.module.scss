@@ -36,9 +36,9 @@
     }
 
     .active {
-      cursor: auto;
-      opacity: .9;
-      transition: all .3s linear;
+      cursor: auto !important;
+      opacity: .5;
+      pointer-events: none;
     }
   }
 

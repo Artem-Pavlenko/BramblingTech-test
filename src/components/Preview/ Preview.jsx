@@ -10,7 +10,7 @@ const Preview = () => {
 
     return (
             <div className={s.previewBlock}>
-                {users.map(u => <Cart key={u.id} {...u}/>)}
+                {users.map((u, i)=> <Cart key={u.id} {...u} index={i}/>)}
             </div>
     )
 }

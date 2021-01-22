@@ -5,6 +5,7 @@
 //}
 
 .inputBlock {
+  margin-bottom: 10px;
   display: inline-block;
   position: relative;
   width: 100%;
@@ -48,12 +49,4 @@
     }
   }
 
-}
-
-.error {
-  div {
-    input {
-      background-color: red;
-    }
-  }
 }

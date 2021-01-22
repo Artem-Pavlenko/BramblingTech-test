@@ -1,16 +1,13 @@
 @import "../../../common/scss/mixins";
 
 .itemBlock {
-  background-color: #fcfcf9;
-  //color: white;
   padding: 20px;
   display: flex;
   justify-content: space-between;
-  margin: 3px auto;
+  margin: 5px auto;
   opacity: 1;
   box-shadow: 0 0 7px 5px rgba(0, 0, 0, .2);
   animation: fade-in 2s forwards;
-  //transition: all 3s linear;
 
   .age {
     width: 25%;
@@ -26,7 +23,6 @@
     img {
       border-radius: 50%;
       width: 50px;
-
     }
 
     span {
@@ -58,14 +54,6 @@
   }
 }
 
-@keyframes load {
-  0% {
-    opacity: 0;
-  }
-  100%{
-    opacity: 1;
-  }
-}
 
 @keyframes fade-in {
   0% {

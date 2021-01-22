@@ -8,3 +8,16 @@
     width: 80%;
     margin: 0 auto;
 }
+
+@media screen and (max-width: 420px){
+    .App {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1025px){
+    .App {
+        margin: 0;
+        width: 89%;
+    }
+}
