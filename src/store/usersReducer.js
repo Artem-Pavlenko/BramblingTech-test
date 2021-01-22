@@ -182,9 +182,15 @@ export const searchUsers = (name) => (dispatch) => {
     })
 }
 
-export const reloadingPage = (upDown = UP_SORT, sort = SORT_BY_ID, view = TABLE) => (dispatch) => {
+export const reloadingPage = (upDown = UP_SORT, sort = SORT_BY_ID, view = TABLE, term) => (dispatch) => {
     dispatch(sortByUpDown(upDown))
     dispatch(sortBy(sort))
     dispatch(setView(view))
     dispatch(setLoading(false))
+    if (term.trim()) {
+        requestUsers().then(res => {
+            dispatch(setUsers(res))
+            dispatch(search(term))
+        })
+    }
 }

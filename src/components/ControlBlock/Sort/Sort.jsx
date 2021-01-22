@@ -40,10 +40,14 @@ const Sort = () => {
         dispatch(sortByUpDown(DOWN_SORT))
     }
     useEffect(() => {
-        const parsed = queryString.parse(history.location.search.substr(1))
-        const parsedView = queryString.parse(history.location.pathname.substr(1))
+        const filter = queryString.parse(history.location.search.substr(1))
+        const filterView = queryString.parse(history.location.pathname.substr(1))
+        console.log(filter)
 
-        dispatch(reloadingPage(parsed.upDown, parsed.sort, parsedView.view))
+        dispatch(reloadingPage(filter.upDown, filter.sort, filterView.view, filter.term))
+        if (filter.term) {
+            setValue(filter.term)
+        }
     }, [])
 
     useEffect(() => {
