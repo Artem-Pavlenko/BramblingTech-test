@@ -8,6 +8,8 @@
   width: 49%;
   min-height: 30vh;
   position: relative;
+  box-shadow: 0 0 7px 5px rgba(0, 0, 0, .2);
+
   @media screen and (max-width: 720px) {
     width: 100%;
     margin-bottom: 7px;
@@ -29,7 +31,6 @@
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 20px;
-    border: 1px solid;
     @media screen and (max-width: 720px) {
       height: 300px;
     }

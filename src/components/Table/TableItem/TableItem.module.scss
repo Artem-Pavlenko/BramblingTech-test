@@ -1,12 +1,14 @@
 @import "../../../common/scss/mixins";
 
 .itemBlock {
-  background-color: gray;
+  background-color: #fcfcf9;
+  //color: white;
   padding: 20px;
   display: flex;
   justify-content: space-between;
   margin: 3px auto;
   opacity: 1;
+  box-shadow: 0 0 7px 5px rgba(0, 0, 0, .2);
   animation: fade-in 2s forwards;
   //transition: all 3s linear;
 

@@ -2,7 +2,6 @@ import React from 'react'
 import {useSelector} from "react-redux"
 import s from './Table.module.scss'
 import TableItem from "./TableItem/TableItem"
-// import {CSSTransition, TransitionGroup} from "react-transition-group";
 
 const Table = () => {
 

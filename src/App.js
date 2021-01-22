@@ -8,6 +8,7 @@ import Table from "./components/Table/Table"
 import Loader from "./common/Loader/Loader"
 import {IntlProvider} from "react-intl"
 import messages from './i18n/messages/index'
+import {requestUsers} from "./api/userAPI";
 
 
 function App() {
@@ -17,11 +18,7 @@ function App() {
     const {loading, language} = useSelector(state => state.app)
 
     useEffect(() => {
-        fetch('http://localhost:3000/data.json')
-            .then(response => response.json())
-            .then(res => {
-                dispatch(getUsers(res))
-            })
+        dispatch(getUsers())
     }, [])
 
 

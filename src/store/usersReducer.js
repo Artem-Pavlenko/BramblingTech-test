@@ -1,4 +1,14 @@
-import {DOWN_SORT, SET_FAVORITE, SET_USERS, SORT_BY_AGE, SORT_BY_ID, SORT_BY_NAME, UP_SORT, VIEW_FILTER} from "./types"
+import {
+    DOWN_SORT,
+    SEARCH_NAME,
+    SET_FAVORITE,
+    SET_USERS,
+    SORT_BY_AGE,
+    SORT_BY_ID,
+    SORT_BY_NAME,
+    UP_SORT,
+    VIEW_FILTER
+} from "./types"
 import cat from '../assets/img/images/cat.svg'
 import dog from '../assets/img/images/dog.svg'
 import fox from '../assets/img/images/fox.svg'
@@ -11,6 +21,7 @@ import raccoon from '../assets/img/images/raccoon.svg'
 import react from '../assets/img/images/react.svg'
 import sheep from '../assets/img/images/sheep.svg'
 import {setLoading} from "./appReducer";
+import {requestUsers} from "../api/userAPI";
 
 
 export const TABLE = 'TABLE'
@@ -18,18 +29,7 @@ export const PREVIEW = 'PREVIEW'
 
 
 const initState = {
-    users: [
-        {
-            "id": 0,
-            "favourite": false,
-            "name": "Gilbert Morton",
-            "age": 30,
-            "phone": "(369) 432-9206",
-            "image": "sheep",
-            "phrase": "Japman somam mes lizmasapa om zefopi ki wa ogju mofrajnir denba uc famoso opeipu woul.",
-            "video": "shoe"
-        }
-    ],
+    users: [],
     filter: {
         term: '',
         sort: SORT_BY_ID,
@@ -152,6 +152,12 @@ export const usersReducer = (state = initState, action) => {
             }
         case VIEW_FILTER:
             return {...state, filter: {...state.filter, view: action.payload}}
+        case SEARCH_NAME:
+            return {
+                ...state,
+                filter: {...state.filter, term: action.payload},
+                users: state.users.filter(u => u.name.includes(action.payload))
+            }
         default:
             return state
     }
@@ -163,12 +169,20 @@ export const setFavorite = (id) => ({type: SET_FAVORITE, payload: id})
 export const sortBy = (type) => ({type})
 export const sortByUpDown = (type) => ({type})
 export const setView = (type) => ({type: VIEW_FILTER, payload: type})
+export const search = (name) => ({type: SEARCH_NAME, payload: name})
 
-export const getUsers = (users) => (dispatch) => {
-    dispatch(setUsers(users))
+export const getUsers = () => (dispatch) => {
+    requestUsers().then(res => dispatch(setUsers(res)))
 }
 
-export const reloadingPage = (upDown, sort, view) => (dispatch) => {
+export const searchUsers = (name) => (dispatch) => {
+    requestUsers().then(res => {
+        dispatch(setUsers(res))
+        dispatch(search(name))
+    })
+}
+
+export const reloadingPage = (upDown = UP_SORT, sort = SORT_BY_ID, view = TABLE) => (dispatch) => {
     dispatch(sortByUpDown(upDown))
     dispatch(sortBy(sort))
     dispatch(setView(view))

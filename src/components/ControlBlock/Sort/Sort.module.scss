@@ -8,27 +8,41 @@
   .btnBlock1 {
     display: flex;
 
-    button {
-      padding: 10px;
-      flex: 1;
-    }
+
   }
 
   .btnBlock2 {
     display: flex;
 
-    button {
-      margin-top: 5px;
-      padding: 10px;
-      flex: 1;
-      cursor: pointer;
-      transition: all .3s linear;
-    }
+
+  }
+}
+
+button {
+  margin-bottom: 15px;
+  position: relative;
+  background: #15d798;
+  border-radius: 11px;
+  padding: 2px 10px 8px;
+  color: #ffffff;
+  font: normal bold 18px/1 "Lobster Two", cursive;
+  text-align: center;
+  text-shadow: 1px 1px #000000;
+  cursor: pointer;
+  box-shadow: 0 5px 0 #0c694b;
+  border: none;
+  flex: 1;
+  transition: background-color 1s linear 0s, top .2s linear 0s, box-shadow .2s linear 0s;
+  &:hover {
+    transition: background-color 1s linear 0s, top .2s linear 0s, box-shadow .2s linear 0s;
+    top: 2px;
+    background-color: #2deeaf;
+    box-shadow: 0 3px 0 #0c694b;
   }
 }
 
 .active {
-  cursor: auto;
-  opacity: .9;
-  transition: all .3s linear;
+  cursor: auto!important;
+  opacity: .5;
+  pointer-events:none;
 }

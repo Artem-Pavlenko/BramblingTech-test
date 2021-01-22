@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react'
+import React, {useRef, useState} from 'react'
 import s from './Cart.module.scss'
 import favouriteIMG from '../../../assets/favoriteStare.svg'
 import unFavouriteIMG from '../../../assets/unfavoriteStare.svg'
@@ -11,13 +11,14 @@ import anonymous from '../../../assets/anonymous.svg'
 
 const Cart = ({name, age, phone, image, phrase, favourite, id, video}) => {
 
+
+    const videoRef = useRef(null)
+
     const dispatch = useDispatch()
     const {photos} = useSelector(state => state.users)
 
-    const [autoPlay, setAutoPlay] = useState(true)
+    const [autoPlay, setAutoPlay] = useState(false)
     const [videoTouched, setVideoTouched] = useState(false)
-
-    const videoRef = useRef(null)
 
     const avatar = photos.find(el => el[image])
 
@@ -31,60 +32,52 @@ const Cart = ({name, age, phone, image, phrase, favourite, id, video}) => {
         }
     }
 
-    // window.addEventListener('scroll', () => {
-    //     if (videoRef.current) {
+    // const testClick = (e) => {
+    //     const horizontalCenter = Math.floor(window.innerHeight)
+    //     const start = Math.floor(horizontalCenter / 3)
+    //     const finish = Math.floor(2 * (horizontalCenter / 3))
     //
-    //         const horizontalCenter = Math.floor(window.innerHeight)
-    //         const start = Math.floor(horizontalCenter / 3)
-    //         const finish = Math.floor(2 * (horizontalCenter / 3))
-    //
-    //         if (videoRef.current.clientHeight < start && videoRef.current.clientHeight < finish) {
-    //
-    //             setAutoPlay(true)
-    //         }
-    //         // if (videoRef.current.clientHeight < start || videoRef.current.clientHeight > finish) {
-    //         //     setAutoPlay(false)
-    //         // }
-    //         console.log(videoRef)
-    //     }
-    //
-    //
-    // })
-
-    const testClick = (e) => {
-
-        const horizontalCenter = Math.floor(window.innerHeight)
-        const start = Math.floor(horizontalCenter / 3)
-        const finish = Math.floor(2 * (horizontalCenter / 3))
-
-        if (e.clientY > start && e.clientY < finish) {
-            setAutoPlay(true)
-        }
+    //     // верхний край страницы относительно нажатию
+    //     console.log('ref', videoRef.current.clientHeight)
+    //     console.log('clientY:', e.clientY)
+    //     console.log('horizontal start :', Math.floor(horizontalCenter / 3))
+    //     console.log('horizontal finish:', Math.floor(2 * (horizontalCenter / 3)))
+    // }
 
 
-        // верхний край страницы относительно верхнего края элемента
-        // console.log('top:', Math.floor(e.target.getBoundingClientRect().top))
+    if (videoRef.current) {
+            window.addEventListener('scroll', () => {
+                if (videoRef.current) {
 
+                    const a = videoRef.current.getBoundingClientRect()
 
-        // верхний край страницы относительно нажатию
-        console.log('clientY:', e.clientY)
-        console.log('horizontal start :', Math.floor(horizontalCenter / 3))
-        console.log('horizontal finish:', Math.floor(2 * (horizontalCenter / 3)))
+                    const horizontal = Math.floor(window.innerHeight)
+                    const start = Math.floor(horizontal / 3)
+                    const finish = Math.floor(2 * (horizontal / 3))
+
+                    if (a.y < finish) {
+                        setAutoPlay(true)
+                    }
+                    console.log(videoRef)
+                }
+            })
     }
 
-    // console.log('height', document.body.scrollHeight)
+
 
     return (
         <div className={s.cartBlock}>
             {
                 video
-                    ? <div ref={videoRef}>
+                    ? <div>
                         <video
+                            ref={videoRef}
+                            controls
                             autoPlay={autoPlay}
+                            // autoPlay={autoPlay && !videoTouched}
                             muted
                             onBlur={blurHandler}
                             // onClick={testClick}
-                            // ref={videoRef}
                         >
                             <source src={(video === 'shoe' && shoeVideo) || (video === 'boy' && boyVideo)}/>
                         </video>
