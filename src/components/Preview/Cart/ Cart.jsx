@@ -7,6 +7,7 @@ import shoeVideo from '../../../assets/videos/shoe.mp4'
 import {setFavorite} from '../../../store/usersReducer'
 import boyVideo from '../../../assets/videos/boy.mp4'
 import anonymous from '../../../assets/anonymous.svg'
+import {useDelay} from "../../../common/hooks/delay";
 
 
 const Cart = ({name, age, phone, image, phrase, favourite, id, video, index}) => {
@@ -14,8 +15,8 @@ const Cart = ({name, age, phone, image, phrase, favourite, id, video, index}) =>
     const videoRef = useRef(null)
     const dispatch = useDispatch()
     const {photos} = useSelector(state => state.users)
-    const [render, setRender] = useState(true)
     const [videoTouched, setVideoTouched] = useState(false)
+    const render = useDelay(index)
 
     const avatar = photos.find(el => el[image])
 
@@ -26,7 +27,6 @@ const Cart = ({name, age, phone, image, phrase, favourite, id, video, index}) =>
     const clickHandler = () => {
         setVideoTouched(true)
     }
-
 
     useEffect(() => {
         function autoplay() {
@@ -50,20 +50,10 @@ const Cart = ({name, age, phone, image, phrase, favourite, id, video, index}) =>
         if (videoRef.current) {
             window.addEventListener('scroll', autoplay)
         }
-
         return () => window.removeEventListener('scroll', autoplay)
 
     }, [videoTouched])
 
-
-    useEffect(() => {
-        let time = +(index + '00')
-        if (time > 2000) {
-            time = 2000
-        }
-        setTimeout(() => setRender(false), time + 800)
-        return () => setRender(true)
-    }, [index])
 
     return (
         <div className={`${render ? s.fadeIn : s.cartBlock}`}>
