@@ -68,7 +68,7 @@ const Cart = ({name, age, phone, image, phrase, favourite, id, video, index}) =>
     return (
         <div className={`${render ? s.fadeIn : s.cartBlock}`}>
             {video
-                ? <div>
+                ? <div className={s.video}>
                     <video
                         ref={videoRef}
                         onClick={clickHandler}
