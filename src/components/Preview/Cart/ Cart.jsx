@@ -58,6 +58,9 @@ const Cart = ({name, age, phone, image, phrase, favourite, id, video, index}) =>
 
     useEffect(() => {
         let time = +(index + '00')
+        if (time > 2000) {
+            time = 2000
+        }
         setTimeout(() => setRender(false), time + 800)
         return () => setRender(true)
     }, [index])

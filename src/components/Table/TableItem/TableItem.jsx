@@ -21,6 +21,9 @@ const TableItem = ({name, age, phone, image, favourite, id, index}) => {
 
     useEffect(() => {
         let time = +(index + '00')
+        if (time > 2000) {
+            time = 2000
+        }
         setTimeout(() => setRender(false), time + 800)
         return () => setRender(true)
     }, [index])
