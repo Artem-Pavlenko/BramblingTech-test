@@ -1,4 +1,4 @@
-import {SET_LANGUAGE, SET_LOADING} from "./types";
+import {SET_LANGUAGE, SET_LOADING} from './types'
 
 const initState = {
     loading: true,

@@ -2,12 +2,12 @@ import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import cn from 'classnames'
 import s from './Sort.module.scss'
-import {reloadingPage, searchUsers, sortBy, sortByUpDown} from "../../../store/usersReducer"
-import {useHistory} from "react-router-dom"
-import * as queryString from "querystring"
-import {DOWN_SORT, SORT_BY_AGE, SORT_BY_ID, SORT_BY_NAME, UP_SORT} from "../../../store/types"
-import {FormattedMessage} from "react-intl"
-import Input from "../../../common/Input/Input"
+import {reloadingPage, searchUsers, sortBy, sortByUpDown} from '../../../store/usersReducer'
+import {useHistory} from 'react-router-dom'
+import * as queryString from 'querystring'
+import {DOWN_SORT, SORT_BY_AGE, SORT_BY_ID, SORT_BY_NAME, UP_SORT} from '../../../store/types'
+import {FormattedMessage} from 'react-intl'
+import Input from '../../../common/Input/Input'
 
 const Sort = () => {
 
@@ -42,7 +42,6 @@ const Sort = () => {
     useEffect(() => {
         const filter = queryString.parse(history.location.search.substr(1))
         const filterView = queryString.parse(history.location.pathname.substr(1))
-        console.log(filter)
 
         dispatch(reloadingPage(filter.upDown, filter.sort, filterView.view, filter.term))
         if (filter.term) {

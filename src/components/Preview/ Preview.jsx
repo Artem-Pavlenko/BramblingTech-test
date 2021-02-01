@@ -1,7 +1,7 @@
 import React from 'react'
-import {useSelector} from "react-redux"
+import {useSelector} from 'react-redux'
 import s from './Preview.module.scss'
-import Cart from "./Cart/ Cart"
+import Cart from './Cart/ Cart'
 
 const Preview = () => {
 

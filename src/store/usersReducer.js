@@ -185,7 +185,7 @@ export const reloadingPage = (upDown = UP_SORT, sort = SORT_BY_ID, view = TABLE,
     dispatch(sortBy(sort))
     dispatch(setView(view))
     dispatch(setLoading(false))
-    if (term.trim()) {
+    if (term) {
         requestUsers().then(res => {
             dispatch(setUsers(res))
             dispatch(search(term))

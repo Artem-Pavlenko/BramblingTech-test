@@ -1,11 +1,11 @@
 import React, {useEffect, useRef, useState} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
 import s from './Cart.module.scss'
-import favouriteIMG from '../../../assets/favoriteStare.svg'
 import unFavouriteIMG from '../../../assets/unfavoriteStare.svg'
-import {useDispatch, useSelector} from "react-redux"
-import {setFavorite} from "../../../store/usersReducer"
-import boyVideo from '../../../assets/videos/boy.mp4'
+import favouriteIMG from '../../../assets/favoriteStare.svg'
 import shoeVideo from '../../../assets/videos/shoe.mp4'
+import {setFavorite} from '../../../store/usersReducer'
+import boyVideo from '../../../assets/videos/boy.mp4'
 import anonymous from '../../../assets/anonymous.svg'
 
 
@@ -15,7 +15,6 @@ const Cart = ({name, age, phone, image, phrase, favourite, id, video, index}) =>
     const dispatch = useDispatch()
     const {photos} = useSelector(state => state.users)
     const [render, setRender] = useState(true)
-    const [autoPlay, setAutoPlay] = useState(false)
     const [videoTouched, setVideoTouched] = useState(false)
 
     const avatar = photos.find(el => el[image])
@@ -24,25 +23,38 @@ const Cart = ({name, age, phone, image, phrase, favourite, id, video, index}) =>
         dispatch(setFavorite(id))
     }
 
-    const blurHandler = (e) => {
-        if (e.currentTarget) {
-            setVideoTouched(true)
-        }
+    const clickHandler = () => {
+        setVideoTouched(true)
     }
 
-    if (videoRef.current) {
-            window.addEventListener('scroll', () => {
-                if (videoRef.current) {
-                    const a = videoRef.current.getBoundingClientRect()
-                    const horizontal = Math.floor(window.innerHeight)
-                    const start = Math.floor(horizontal / 3)
-                    const finish = Math.floor(2 * (horizontal / 3))
-                    if (a.y < start && a.y < finish) {
-                        setAutoPlay(true)
-                    }
+
+    useEffect(() => {
+        function autoplay() {
+            if (videoRef.current) {
+                const videoPosition = videoRef.current.getBoundingClientRect()
+                const horizontal = Math.floor(document.documentElement.clientHeight)
+                const start = Math.floor(horizontal / 3)
+                const finish = Math.floor(2 * start)
+
+                const videoTop = Math.floor(videoPosition.y)
+                const videoBottom = Math.floor(videoPosition.y) + Math.floor(videoPosition.height)
+
+                if ((videoTop > start && videoTop < finish) || (videoBottom > start && videoBottom < finish)) {
+                    !videoTouched && videoRef.current.play()
+                } else {
+                    !videoTouched && videoRef.current.pause()
                 }
-            })
-    }
+            }
+        }
+
+        if (videoRef.current) {
+            window.addEventListener('scroll', autoplay)
+        }
+
+        return () => window.removeEventListener('scroll', autoplay)
+
+    }, [videoTouched])
+
 
     useEffect(() => {
         let time = +(index + '00')
@@ -51,46 +63,41 @@ const Cart = ({name, age, phone, image, phrase, favourite, id, video, index}) =>
     }, [index])
 
     return (
-            <div className={`${render ? s.fadeIn : s.cartBlock}`}>
-            {
-                video
-                    ? <div>
-                        <video
-                            ref={videoRef}
-                            controls
-                            autoPlay={autoPlay}
-                            // autoPlay={autoPlay && !videoTouched}
-                            muted
-                            onBlur={blurHandler}
-                            // onClick={testClick}
-                        >
-                            <source src={(video === 'shoe' && shoeVideo) || (video === 'boy' && boyVideo)}/>
-                        </video>
+        <div className={`${render ? s.fadeIn : s.cartBlock}`}>
+            {video
+                ? <div>
+                    <video
+                        ref={videoRef}
+                        onClick={clickHandler}
+                        controls
+                        muted
+                    >
+                        <source src={(video === 'shoe' && shoeVideo) || (video === 'boy' && boyVideo)}/>
+                    </video>
+                </div>
+                : <div className={s.wrapper}>
+                    <div className={s.profileInfo}>
+                        <div>
+                            <img src={avatar ? avatar[image] : anonymous} alt=""/>
+                            <span>{name}</span>
+                        </div>
+                        <img
+                            onClick={onChangeFavorite}
+                            className={s.star}
+                            src={favourite ? favouriteIMG : unFavouriteIMG}
+                            alt=""
+                        />
                     </div>
-                    : <div className={s.wrapper}>
-                        <div className={s.profileInfo}>
-                            <div>
-                                <img src={avatar ? avatar[image] : anonymous} alt=""/>
-                                <span>{name}</span>
-                            </div>
-                            <img
-                                onClick={onChangeFavorite}
-                                className={s.star}
-                                src={favourite ? favouriteIMG : unFavouriteIMG}
-                                alt=""
-                            />
-                        </div>
-                        <div className={s.age}>
-                            <span>{age}</span>
-                        </div>
-                        <div className={s.phone}>
-                            <span>{phone}</span>
-                        </div>
-                        <div className={s.phrase}>
-                            {phrase}
-                        </div>
+                    <div className={s.age}>
+                        <span>{age}</span>
                     </div>
-            }
+                    <div className={s.phone}>
+                        <span>{phone}</span>
+                    </div>
+                    <div className={s.phrase}>
+                        {phrase}
+                    </div>
+                </div>}
         </div>
     )
 }
