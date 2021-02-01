@@ -89,9 +89,11 @@ const Cart = ({name, age, phone, image, phrase, favourite, id, video, index}) =>
                         />
                     </div>
                     <div className={s.age}>
+                        <span>age: </span>
                         <span>{age}</span>
                     </div>
                     <div className={s.phone}>
+                        <span>tel: </span>
                         <span>{phone}</span>
                     </div>
                     <div className={s.phrase}>

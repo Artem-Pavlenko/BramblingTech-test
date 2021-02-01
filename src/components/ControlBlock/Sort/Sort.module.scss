@@ -1,15 +1,21 @@
+@import "src/common/scss/mixins";
 
 .sortBlock {
   display: flex;
   flex-direction: column;
   width: 50%;
+  @media screen and (max-width: 520px) {
+    width: 100%;
+  }
 
   .btnBlock1 {
     display: flex;
+    @include btnMargin(520px ,15px);
   }
 
   .btnBlock2 {
     display: flex;
+    @include btnMargin(520px, 15px);
   }
 }
 
@@ -17,7 +23,7 @@ button {
   margin-bottom: 15px;
   position: relative;
   background: #15d798;
-  border-radius: 11px;
+  border-radius: 3px 3px 7px 7px;
   padding: 2px 10px 8px;
   color: #ffffff;
   font: normal bold 18px/1 "Lobster Two", cursive;
@@ -28,6 +34,9 @@ button {
   border: none;
   flex: 1;
   transition: background-color 1s linear 0s, top .2s linear 0s, box-shadow .2s linear 0s;
+  &:not(:last-child){
+    margin-right: 15px;
+  }
 
   &:hover {
     transition: background-color 1s linear 0s, top .2s linear 0s, box-shadow .2s linear 0s;

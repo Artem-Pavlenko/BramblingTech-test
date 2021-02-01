@@ -1,6 +1,6 @@
 import React, {useEffect} from "react"
 import {useDispatch, useSelector} from "react-redux"
-import './App.css'
+import './App.scss'
 import ControlBlock from "./components/ControlBlock/ControlBlock"
 import {getUsers, TABLE} from "./store/usersReducer"
 import Preview from "./components/Preview/ Preview"

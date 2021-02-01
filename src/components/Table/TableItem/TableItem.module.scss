@@ -8,9 +8,15 @@
   opacity: 1;
   box-shadow: 0 0 7px 5px rgba(0, 0, 0, .2);
   animation: fade-in 2s forwards;
-
+  @media screen and (max-width: 375px){
+    padding: 15px 5px;
+    font-size: 12px;
+  }
   .age {
     width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     @include flexCenter();
   }
 
@@ -37,8 +43,8 @@
   .phone {
     width: 25%;
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .favorite {
@@ -46,10 +52,19 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    @media screen and (max-width: 375px){
+      width: 10%;
+    }
 
     img {
       cursor: pointer;
-      width: 10%;
+      width: 15%;
+      @media screen and (max-width: 480px){
+        width: 25%;
+      }
+      @media screen and (max-width: 320px){
+        width: 30px;
+      }
     }
   }
 }

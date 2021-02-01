@@ -4,3 +4,11 @@
   justify-content: center;
   align-items: center;
 }
+
+@mixin btnMargin ($maxWidth ,$margin) {
+  @media screen and (max-width: $maxWidth){
+    button:not(:last-child) {
+      margin-right: $margin;
+    }
+  }
+}

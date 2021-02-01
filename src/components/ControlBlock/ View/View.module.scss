@@ -1,9 +1,12 @@
+@import "src/common/scss/mixins";
+
 
 .viewBlock {
   display: flex;
   flex-direction: column;
-  //border: 1px solid;
-  width: 30%;
+  @media screen and (max-width: 520px){
+    width: 100%;
+  }
 
   .informationBlock {
     display: flex;
@@ -27,7 +30,7 @@
 
   .btnBlock {
     display: flex;
-
+    @include btnMargin(520px, 25px);
     button {
       flex: 1;
       padding: 32px;
